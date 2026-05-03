@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShareCode Editor – キャラメイク編集</title>
+  <meta name="description" content="BPSR キャラクター作成シェアコードのバイナリエディタ" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --bg:          #0d0f1a;
+      --bg-card:     #13162b;
+      --bg-surface:  #1a1e38;
+      --bg-hover:    #222748;
+      --border:      #2a2f55;
+      --border-hi:   #3d4580;
+      --accent:      #6c63ff;
+      --accent-dim:  #4b44cc;
+      --success:     #4cdb8c;
+      --warn:        #f5a623;
+      --error:       #ff5555;
+      --text:        #e8eaf6;
+      --text-sub:    #9fa8da;
+      --text-muted:  #6672a8;
+      --mono:        'JetBrains Mono', monospace;
+      --sans:        'Inter', sans-serif;
+      --radius:      8px;
+      --radius-sm:   4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .app-header {
+      background: linear-gradient(135deg, #1a1e38 0%, #0d0f1a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .app-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      background: linear-gradient(90deg, #a78bfa, #6c63ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .app-sub {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* ── Layout ── */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    /* ── Input Panel ── */
+    .input-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .panel-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    textarea#inputCode {
+      width: 100%;
+      height: 70px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 10px 12px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    textarea#inputCode:focus {
+      border-color: var(--accent);
+    }
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Buttons ── */
+    button {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    button:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hi);
+      color: var(--text-sub);
+    }
+    .btn-ghost:hover { background: var(--bg-hover); }
+    .btn-copy {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hi);
+      color: var(--success);
+    }
+    .btn-copy:hover { background: var(--bg-hover); }
+
+    .btn-sep {
+      color: var(--border-hi);
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .def-select {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--radius-sm);
+      color: var(--text-sub);
+      padding: 5px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+    .def-select:focus { border-color: var(--accent); }
+
+    /* ── Status / Warn ── */
+    #loadStatus {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .status-ok    { color: var(--success); }
+    .status-error { color: var(--error);   }
+
+    #warnBox {
+      display: none;
+      background: rgba(245, 166, 35, 0.08);
+      border: 1px solid rgba(245, 166, 35, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--warn);
+      line-height: 1.8;
+    }
+    #warnBox:not(:empty) { display: block; }
+    .warn-icon { margin-right: 6px; }
+
+    /* ── Output Panel ── */
+    .output-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    input#outputCode {
+      flex: 1;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--success);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 8px 12px;
+      outline: none;
+    }
+
+    #sections {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 6px 10px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* ── Field Row ── */
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 3px 4px;
+      border-radius: var(--radius-sm);
+      transition: background 0.1s;
+      min-height: 32px;
+    }
+    .field-row:hover:not(.field-header) { background: var(--bg-hover); }
+
+    .field-header {
+      position: sticky;
+      top: 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2px;
+      padding: 5px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .field-offset {
+      width: 48px;
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: right;
+      padding-right: 12px;
+    }
+
+    .field-name {
+      width: 160px;
+      flex-shrink: 0;
+      font-size: 13px;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 8px;
+    }
+
+    .field-id {
+      width: 180px;
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-sub);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 8px;
+    }
+
+    .ctrl-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .field-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .field-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-left: 8px;
+      white-space: nowrap;
+    }
+    .tag-const { background: #1e2a3a; color: #6699aa; }
+    .tag-u8    { background: #1a2e1a; color: #4cdb8c; }
+    .tag-i8    { background: #2e1a2e; color: #c678dd; }
+    .tag-u32   { background: #1a2040; color: #61afef; }
+    .tag-hsv   { background: #2a1a10; color: #e5c07b; }
+    .tag-unk   { background: #2a2a2a; color: #888;    }
+
+    .field-notes {
+      font-size: 11px;
+      color: var(--text-muted);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Inputs ── */
+    input[type="number"] {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      padding: 4px 8px;
+      outline: none;
+      transition: border-color 0.15s;
+      /* Chrome/Edge の矢印を非表示 */
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus { border-color: var(--accent); }
+
+    .num-input      { width: 80px;  }
+    .num-wide       { width: 110px; }
+
+    /* ── Const badge ── */
+    .const-badge {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      display: inline-block;
+      width: 80px;
+      text-align: center;
+    }
+
+    /* ── HSV group ── */
+    .hsv-group {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .hsv-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 14px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .hsv-input { width: 60px; }
+
+    /* ── Color Swatch ── */
+    .color-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--border-hi);
+      flex-shrink: 0;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header class="app-header">
+  <div>
+    <div class="app-title">ShareCode Editor</div>
+    <div class="app-sub">キャラクター作成シェアコード バイナリエディタ</div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- 入力エリア -->
+  <div class="card input-panel">
+    <div class="panel-label">シェアコード入力</div>
+    <textarea id="inputCode" placeholder="Star/H4sI... を貼り付けてください"></textarea>
+    <div class="btn-row">
+      <button class="btn-primary" id="decodeBtn" onclick="loadCode()">デコード</button>
+      <span class="btn-sep">|</span>
+      <select id="defGender" class="def-select">
+        <option value="2">女</option>
+        <option value="1">男</option>
+      </select>
+      <select id="defSize" class="def-select">
+        <option value="1">S</option>
+        <option value="2">M</option>
+        <option value="3">L</option>
+      </select>
+      <button class="btn-ghost" onclick="loadDefaultCode()">デフォルト読み込み</button>
+      <span id="loadStatus"></span>
+    </div>
+    <div id="warnBox"></div>
+  </div>
+
+  <!-- フィールド一覧 -->
+  <div id="sections"></div>
+
+  <!-- 出力エリア -->
+  <div class="card input-panel">
+    <div class="panel-label">エンコード出力</div>
+    <div class="btn-row">
+      <button class="btn-ghost" onclick="encodeCode()">エンコード</button>
+    </div>
+    <div class="output-row">
+      <input type="text" id="outputCode" readonly placeholder="エンコードボタンを押すと出力されます" />
+      <button class="btn-copy" id="copyBtn" onclick="copyOutput()">コピー</button>
+    </div>
+  </div>
+
+</main>
+
+<script src="./editor.js"></script>
+<script>
+  // ペースト時に自動で空白除去 + デコード実行
+  document.getElementById('inputCode').addEventListener('paste', (e) => {
+    e.preventDefault();
+    const raw = (e.clipboardData || window.clipboardData).getData('text');
+    const clean = raw.replace(/\s/g, '');
+    e.target.value = clean;
+    // 少し待ってからデコード
+    setTimeout(() => loadCode(), 80);
+  });
+</script>
+</body>
+</html>

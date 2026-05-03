@@ -1,0 +1,658 @@
+[
+  {
+    "offset": 0,
+    "size": 1,
+    "id": null,
+    "name": "header_0",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 1,
+    "size": 1,
+    "id": null,
+    "name": "header_1",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 2,
+    "size": 1,
+    "id": null,
+    "name": "header_2",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 3,
+    "size": 1,
+    "id": null,
+    "name": "header_3",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 4,
+    "size": 1,
+    "id": null,
+    "name": "header_4",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 5,
+    "size": 1,
+    "id": null,
+    "name": "header_5",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 6,
+    "size": 1,
+    "id": null,
+    "name": "header_6",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 7,
+    "size": 1,
+    "id": null,
+    "name": "header_7",
+    "type": "constant",
+    "note": ""
+  },
+  {
+    "offset": 8,
+    "size": 1,
+    "id": "Gender",
+    "name": "性別",
+    "type": "uint8",
+    "note": "男=1, 女=2"
+  },
+  {
+    "offset": 9,
+    "size": 1,
+    "id": "BodySize",
+    "name": "体型",
+    "type": "uint8",
+    "note": "S=1, M=2, L=3"
+  },
+  {
+    "offset": 10,
+    "size": 4,
+    "id": "SkinColor",
+    "name": "肌の色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 14,
+    "size": 1,
+    "id": "BodyHeight",
+    "name": "身長",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 15,
+    "size": 1,
+    "id": "ArmWidth",
+    "name": "腕",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 16,
+    "size": 1,
+    "id": "ChestWidth",
+    "name": "男性胸囲",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 17,
+    "size": 1,
+    "id": "FemaleChest",
+    "name": "女性胸囲",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 18,
+    "size": 1,
+    "id": "WaistWidth",
+    "name": "ウエスト",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 19,
+    "size": 1,
+    "id": "CrotchWidth",
+    "name": "腰",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 20,
+    "size": 1,
+    "id": "ThighWidth",
+    "name": "太もも",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 21,
+    "size": 1,
+    "id": "ShankWidth",
+    "name": "脛",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 22,
+    "size": 4,
+    "id": "HairId",
+    "name": "髪プリセット",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 26,
+    "size": 4,
+    "id": "FrontHairId",
+    "name": "前髪",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 30,
+    "size": 4,
+    "id": "BackHairId",
+    "name": "後ろ髪",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 34,
+    "size": 4,
+    "id": "DullHairId",
+    "name": "頭頂部",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 38,
+    "size": 4,
+    "id": "HairColorBase",
+    "name": "髪色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 42,
+    "size": 1,
+    "id": "HairIsGradual",
+    "name": "髪色グラデ有無",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 43,
+    "size": 4,
+    "id": "HairGradualColor",
+    "name": "髪色グラデ",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 47,
+    "size": 1,
+    "id": "HairGradualRange",
+    "name": "髪色グラデ位置",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 48,
+    "size": 1,
+    "id": "HairOneIsHighlights",
+    "name": "メッシュ1有無",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 49,
+    "size": 4,
+    "id": "HairOneHighlightsColor",
+    "name": "メッシュ1色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 53,
+    "size": 1,
+    "id": "HairTwoIsHighlights",
+    "name": "メッシュ2有無",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 54,
+    "size": 4,
+    "id": "HairTwoHighlightsColor",
+    "name": "メッシュ2色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 58,
+    "size": 4,
+    "id": "FaceShapeId",
+    "name": "顔立ち",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 62,
+    "size": 1,
+    "id": "FaceLength",
+    "name": "顎の長さ",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 63,
+    "size": 4,
+    "id": "EyebrowId",
+    "name": "眉毛",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 67,
+    "size": 1,
+    "id": "EyebrowAngle",
+    "name": "眉毛の角度",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 68,
+    "size": 4,
+    "id": "EyebrowColor",
+    "name": "眉毛の色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 72,
+    "size": 4,
+    "id": "EyeId",
+    "name": "目の種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 76,
+    "size": 1,
+    "id": "EyeUpDown",
+    "name": "目の位置",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 77,
+    "size": 1,
+    "id": "EyeAngle",
+    "name": "目の角度",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 78,
+    "size": 4,
+    "id": "EyelashId",
+    "name": "まつ毛の種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 82,
+    "size": 4,
+    "id": "EyelashColor",
+    "name": "まつ毛の色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 86,
+    "size": 4,
+    "id": "PupilId",
+    "name": "瞳の種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 90,
+    "size": 1,
+    "id": "PupilIsDiff",
+    "name": "オッドアイ有無",
+    "type": "uint8",
+    "note": "この値に関わらず左右の目の色が異なればオッドアイになる"
+  },
+  {
+    "offset": 91,
+    "size": 1,
+    "id": "PupilIsArea",
+    "name": "カラー調節有無",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 92,
+    "size": 4,
+    "id": "PupilLeftColor0",
+    "name": "左目の色1",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 96,
+    "size": 4,
+    "id": "PupilLeftColor1",
+    "name": "左目の色2",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 100,
+    "size": 4,
+    "id": "PupilLeftColor2",
+    "name": "左目の色3",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 104,
+    "size": 4,
+    "id": "PupilLeftColor3",
+    "name": "左目の色4",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 108,
+    "size": 4,
+    "id": "PupilRightColor0",
+    "name": "右目の色1",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 112,
+    "size": 4,
+    "id": "PupilRightColor1",
+    "name": "右目の色2",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 116,
+    "size": 4,
+    "id": "PupilRightColor2",
+    "name": "右目の色3",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 120,
+    "size": 4,
+    "id": "PupilRightColor3",
+    "name": "右目の色4",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 124,
+    "size": 1,
+    "id": "PupilLongDiameter",
+    "name": "瞳の形",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 125,
+    "size": 1,
+    "id": "PupilShortDiameter",
+    "name": "瞳の大きさ",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 126,
+    "size": 4,
+    "id": "NoseId",
+    "name": "鼻の種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 130,
+    "size": 1,
+    "id": "NoseUpDown",
+    "name": "鼻の位置",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 131,
+    "size": 4,
+    "id": "MouthId",
+    "name": "口の種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 135,
+    "size": 4,
+    "id": "EyeshadowId",
+    "name": "アイシャドウの種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 139,
+    "size": 4,
+    "id": "EyeshadowColor",
+    "name": "アイシャドウ色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 143,
+    "size": 4,
+    "id": "LipstickId",
+    "name": "リップグロスの種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 147,
+    "size": 4,
+    "id": "LipstickColor",
+    "name": "リップグロス色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 151,
+    "size": 4,
+    "id": "BeardId",
+    "name": "ヒゲ種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 155,
+    "size": 4,
+    "id": "BeardColor",
+    "name": "ヒゲ色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 159,
+    "size": 4,
+    "id": "Tooth",
+    "name": "歯の種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 163,
+    "size": 4,
+    "id": "FeatureOneId",
+    "name": "特徴1種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 167,
+    "size": 1,
+    "id": "FeatureOnePosX",
+    "name": "特徴1位置X",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 168,
+    "size": 1,
+    "id": "Unknown168",
+    "name": "unknown_168",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 169,
+    "size": 1,
+    "id": "FeatureOnePosY",
+    "name": "特徴1位置Y",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 170,
+    "size": 1,
+    "id": "Unknown170",
+    "name": "unknown_170",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 171,
+    "size": 1,
+    "id": "FeatureOneScale",
+    "name": "特徴1サイズ",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 172,
+    "size": 1,
+    "id": "FeatureOneRotation",
+    "name": "特徴1角度",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 173,
+    "size": 1,
+    "id": "FeatureOneIsReverse",
+    "name": "特徴1反転",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 174,
+    "size": 4,
+    "id": "FeatureOneColor",
+    "name": "特徴1色",
+    "type": "hsv_color",
+    "note": ""
+  },
+  {
+    "offset": 178,
+    "size": 4,
+    "id": "FeasureTwoId",
+    "name": "特徴2種類",
+    "type": "uint32_le",
+    "note": ""
+  },
+  {
+    "offset": 182,
+    "size": 1,
+    "id": "FeatureTwoPosX",
+    "name": "特徴2位置X",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 183,
+    "size": 1,
+    "id": "Unknown183",
+    "name": "unknown_183",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 184,
+    "size": 1,
+    "id": "FeatureTwoPosY",
+    "name": "特徴2位置Y",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 185,
+    "size": 1,
+    "id": "Unknown185",
+    "name": "unknown_185",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 186,
+    "size": 1,
+    "id": "FeatureTwoScale",
+    "name": "特徴2サイズ",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 187,
+    "size": 1,
+    "id": "FeatureTwoRotation",
+    "name": "特徴2角度",
+    "type": "int8",
+    "note": ""
+  },
+  {
+    "offset": 188,
+    "size": 1,
+    "id": "FeatureTwoIsReverse",
+    "name": "特徴2反転",
+    "type": "uint8",
+    "note": ""
+  },
+  {
+    "offset": 189,
+    "size": 4,
+    "id": "FeatureTwoColor",
+    "name": "特徴2色",
+    "type": "hsv_color",
+    "note": ""
+  }
+]
