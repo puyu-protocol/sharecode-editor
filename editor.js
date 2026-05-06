@@ -169,6 +169,10 @@ function readField(f) {
       const v = bytes[f.offset];
       return v > 127 ? v - 256 : v;
     }
+    case 'int16_le': {
+      const v = bytes[f.offset] | (bytes[f.offset + 1] << 8);
+      return v > 32767 ? v - 65536 : v;
+    }
     case 'uint32_le':
       return (bytes[f.offset]) |
              (bytes[f.offset + 1] << 8) |
@@ -194,6 +198,10 @@ function writeField(f, value) {
       bytes[f.offset] = (value >>> 0) & 0xFF; break;
     case 'int8':
       bytes[f.offset] = ((value + 256) & 0xFF); break;
+    case 'int16_le':
+      bytes[f.offset]     = value & 0xFF;
+      bytes[f.offset + 1] = (value >> 8) & 0xFF;
+      break;
     case 'uint32_le':
       bytes[f.offset]     = (value >>> 0)  & 0xFF;
       bytes[f.offset + 1] = (value >>> 8)  & 0xFF;
@@ -218,6 +226,7 @@ function collectFromUI() {
       case 'constant':
       case 'uint8':
       case 'int8':
+      case 'int16_le':
       case 'unknown': {
         const el = document.getElementById(`field-${f.offset}`);
         if (el) writeField(f, parseInt(el.value) || 0);
@@ -338,8 +347,9 @@ function buildControl(field, val) {
     }
 
     case 'uint8':
-    case 'int8': {
-      const [min, max] = field.type === 'int8' ? [-128, 127] : [0, 255];
+    case 'int8':
+    case 'int16_le': {
+      const [min, max] = field.type === 'int8' ? [-128, 127] : field.type === 'int16_le' ? [-32768, 32767] : [0, 255];
       const el = document.createElement('input');
       el.type      = 'number';
       el.className = 'num-input';
@@ -470,6 +480,7 @@ function typeTagClass(type) {
     case 'constant':  return 'tag-const';
     case 'uint8':     return 'tag-u8';
     case 'int8':      return 'tag-i8';
+    case 'int16_le':  return 'tag-i16';
     case 'uint32_le': return 'tag-u32';
     case 'hsv_color': return 'tag-hsv';
     default:          return 'tag-unk';
@@ -481,6 +492,7 @@ function typeLabel(type) {
     case 'constant':  return 'const';
     case 'uint8':     return 'u8';
     case 'int8':      return 'i8';
+    case 'int16_le':  return 'i16';
     case 'uint32_le': return 'u32';
     case 'hsv_color': return 'hsv';
     default:          return '?';
