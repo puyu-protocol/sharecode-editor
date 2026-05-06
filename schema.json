@@ -521,34 +521,18 @@
   },
   {
     "offset": 167,
-    "size": 1,
+    "size": 2,
     "id": "FeatureOnePosX",
     "name": "特徴1位置X",
-    "type": "int8",
-    "note": ""
-  },
-  {
-    "offset": 168,
-    "size": 1,
-    "id": "Unknown168",
-    "name": "unknown_168",
-    "type": "int8",
+    "type": "int16_le",
     "note": ""
   },
   {
     "offset": 169,
-    "size": 1,
+    "size": 2,
     "id": "FeatureOnePosY",
     "name": "特徴1位置Y",
-    "type": "int8",
-    "note": ""
-  },
-  {
-    "offset": 170,
-    "size": 1,
-    "id": "Unknown170",
-    "name": "unknown_170",
-    "type": "int8",
+    "type": "int16_le",
     "note": ""
   },
   {
@@ -586,41 +570,25 @@
   {
     "offset": 178,
     "size": 4,
-    "id": "FeasureTwoId",
+    "id": "FeatureTwoId",
     "name": "特徴2種類",
     "type": "uint32_le",
     "note": ""
   },
   {
     "offset": 182,
-    "size": 1,
+    "size": 2,
     "id": "FeatureTwoPosX",
     "name": "特徴2位置X",
-    "type": "int8",
-    "note": ""
-  },
-  {
-    "offset": 183,
-    "size": 1,
-    "id": "Unknown183",
-    "name": "unknown_183",
-    "type": "int8",
+    "type": "int16_le",
     "note": ""
   },
   {
     "offset": 184,
-    "size": 1,
+    "size": 2,
     "id": "FeatureTwoPosY",
     "name": "特徴2位置Y",
-    "type": "int8",
-    "note": ""
-  },
-  {
-    "offset": 185,
-    "size": 1,
-    "id": "Unknown185",
-    "name": "unknown_185",
-    "type": "int8",
+    "type": "int16_le",
     "note": ""
   },
   {
